@@ -797,12 +797,14 @@ wxString GroupCell::ToTeX(wxString imgDir, wxString filename, int *imgCounter)
 	      {
 		// We either got a bracket or a parenthesis or regular Text
 		// that shouldn't be displayed as math.
-		if((mathMode)&&(tmp->ToString().Length()>2))
+		/*if((mathMode)&&(tmp->ToString().Length()<2))
 		  {
 		    str += wxT("\\mbox{}");
 		    str += wxT("\n\\]\n");
 		    mathMode = false;
-		  }
+		  }*/
+		
+		/* This seems to break the output of lists as results. Thus disables. Please check */
 	      }
 	    else
 	      {
@@ -822,6 +824,7 @@ wxString GroupCell::ToTeX(wxString imgDir, wxString filename, int *imgCounter)
 	  // no output to display.
 	  str += wxT("\\mbox{}");
 	  str += wxT("\n\\]\n%%%%%%%%%%%%%%%");
+	  mathMode = false;
 	}
     }
   }
@@ -853,6 +856,7 @@ wxString GroupCell::ToTeX(wxString imgDir, wxString filename, int *imgCounter)
           str = str;
 	  str = MarkDownParser.MarkDown(str);
         }
+        str += wxT(" \\par\n");
         break;
     }
   }
