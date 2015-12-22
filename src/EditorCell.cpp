@@ -244,6 +244,8 @@ wxString EditorCell::ToTeX()
   text.Replace(wxT("<"), wxT("\\ensuremath{<}"));
   text.Replace(wxT(">"), wxT("\\ensuremath{>}"));
   text.Replace(wxT("\n"), wxT(" \\\\\n"));
+  text.Replace(wxT("["), wxT("{[}"));
+  text.Replace(wxT("]"), wxT("{]}"));
    return text;
 }
 
